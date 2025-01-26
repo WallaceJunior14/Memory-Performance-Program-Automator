@@ -45,8 +45,7 @@ int main() {
 }
 """
 
-# Intervalos de TAM para teste
-# De 100 a 19000
+# Definir valores para TAM -> 100 a 19000
 tam_values = [100, 500, 1000, 5000, 10000, 15000, 19000]
 
 temp_filename = "temp_code.c"
@@ -55,14 +54,14 @@ output_filename = "temp_executable.out"
 times = []
 
 for tam in tam_values:
-    # Substituir {TAM} no codigo C
+    # Substituir {TAM} 
     code_with_tam = c_code.replace("{TAM}", str(tam))
 
-    # Salvar o codigo C em um arquivo
+    # Criar/Alterar -> arquivo .c para valores diferentes de tam
     with open(temp_filename, "w") as f:
         f.write(code_with_tam)
 
-    # Compilar o codigo C
+    # Compilar o codigo .c
     compile_result = subprocess.run(["gcc", temp_filename, "-o", output_filename], stderr=subprocess.PIPE)
 
     if compile_result.returncode != 0:
